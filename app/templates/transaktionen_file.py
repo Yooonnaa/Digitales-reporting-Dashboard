@@ -59,3 +59,22 @@ def gesamtsumme_einnahmen():
         print(f"Gesamtsumme der Einnahmen: {gesamtsumme:.2f}")
         #Zeigt an wie viele Reihen bearbeitet wurden.
         print(f"Processed {line_count} line(s).")
+
+
+# Gesamtsumme der Ausgaben berechnen
+def gesamtsumme_ausgaben():
+    with open("transaktionen.csv", "r") as csv_datei:
+        csv_reader = csv.DictReader(csv_datei)
+        line_count = 0
+        gesamtsumme = 0
+        for row in csv_reader:
+            if row["typ"] == "Ausgabe":
+                row["betrag"] = float(row["betrag"])
+                gesamtsumme += row["betrag"]
+                line_count += 1
+        #Gibt den Wert der Gesamtsumme aus in €
+        print(f"Gesamtsumme der Ausgaben: {gesamtsumme:.2f}")
+        #Zeigt an wie viele Reihen bearbeitet wurden.
+        print(f"Processed {line_count} line(s).")
+
+# Bilanz Berechnen
